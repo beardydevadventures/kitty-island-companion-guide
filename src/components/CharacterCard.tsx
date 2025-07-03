@@ -1,16 +1,17 @@
 
 import React from 'react';
-import { Heart, Star, Gift } from 'lucide-react';
+import { Heart, Star, Gift, Tag } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { gifts } from '@/data/gameData';
+import { gifts, tags } from '@/data/gameData';
 
 interface Character {
   id: string;
   name: string;
   series: string;
   location: string;
+  favoriteTags: string[];
   favoriteGifts: string[];
   friendshipLevel: number;
   maxFriendshipLevel: number;
@@ -64,6 +65,28 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onGiftClick })
           <span className="text-sm font-medium text-gray-700">Friendship Level:</span>
           <div className="flex space-x-1">
             {renderHearts()}
+          </div>
+        </div>
+
+        {/* Favorite Tags Section */}
+        <div className="space-y-2">
+          <div className="flex items-center space-x-2">
+            <Tag className="w-4 h-4 text-purple-500" />
+            <span className="text-sm font-medium text-gray-700">Favorite Tags:</span>
+          </div>
+          <div className="flex flex-wrap gap-1">
+            {character.favoriteTags.map((tagId) => {
+              const tag = tags.find(t => t.id === tagId);
+              return tag ? (
+                <Badge
+                  key={tagId}
+                  variant="outline"
+                  className="text-xs bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100"
+                >
+                  {tag.name}
+                </Badge>
+              ) : null;
+            })}
           </div>
         </div>
 
