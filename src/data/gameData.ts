@@ -6,7 +6,9 @@ export interface Character {
   name: string;
   series: string;
   location: string;
+  favoriteTags: string[];
   favoriteGifts: string[];
+  giftGiven: string;
   friendshipLevel: number;
   maxFriendshipLevel: number;
   description: string;
@@ -23,6 +25,13 @@ export interface Gift {
   foundAt?: string[];
 }
 
+export interface Tag {
+  id: string;
+  name: string;
+  description: string;
+  color: string;
+}
+
 export interface Location {
   id: string;
   name: string;
@@ -32,69 +41,406 @@ export interface Location {
 
 export const characters: Character[] = [
   {
-    id: 'hello-kitty',
-    name: 'Hello Kitty',
-    series: 'Hello Kitty',
-    location: 'Rainbow Reef',
-    favoriteGifts: ['apple-pie', 'rainbow-cupcake', 'friendship-bracelet'],
-    friendshipLevel: 3,
-    maxFriendshipLevel: 5,
-    description: 'The sweetest kitty who loves making friends and baking delicious treats!'
+    "id": "hello-kitty",
+    "name": "Hello Kitty",
+    "series": "Sanrio",
+    "location": "Seaside Resort (Cafe)",
+    "favoriteTags": ["fruity", "baked", "fancy"],
+    "favoriteGifts": [
+      "red-bow-apple-pie",
+      "mamas-apple-pie",
+      "strawberry-shortcake",
+      "candied-banana-coffee"
+    ],
+    "giftGiven": "Mama's Apple Pie",
+    "friendshipLevel": 1,
+    "maxFriendshipLevel": 20,
+    "description": "Hello Kitty is the first character you meet when starting the game. Described as a great listener, thoughtful gift-giver, and someone who loves to chat. Found in the cafe, she provides helpful baking tips. Likes gifts tagged with Fruity, Baked, and Fancy."
+  },
+  {
+    "id": "chococat",
+    "name": "Chococat",
+    "series": "Hello Kitty",
+    "location": "Seaside Resort",
+    "favoriteTags": ["Book", "Device", "Chocolate"],
+    "favoriteGifts": [
+      "interactive-history-of-chocolate",
+      "ancient-inventions",
+      "glitchy-book",
+      "meditations-on-resilience",
+      "mocha-item",
+      "hot-cocoa",
+      "boulder-bits-ice-cream",
+      "volcano-cake",
+      "blank-book"
+    ],
+    "giftGiven": "Gizmo",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 15,
+    "description": "Chococat tends to be a little scatterbrained at times, but he has a curious mind and is always up on the latest news. He is a DIY genius and can help you craft tools and all sorts of trinkets. With you and Chococat on the case, there’s nothing you can’t solve together!"
+  },
+  {
+    "id": "cinnamoroll",
+    "name": "Cinnamoroll",
+    "series": "Hello Kitty Island Adventure",
+    "location": "Unlocked during the Delivery Service quest after befriending Kuromi in Spooky Swamp",
+    "favoriteTags": ["Coffee", "Chocolate", "Spicy"],
+    "favoriteGifts": [
+      "chocolate-chai-latte",
+      "mocha",
+      "chai",
+      "volcano-cake",
+      "hot-cocoa",
+      "espresso",
+      "molten-frappe",
+      "spicy-pumpkin-cake"
+    ],
+    "giftGiven": "",
+    "friendshipLevel": 1,
+    "maxFriendshipLevel": 20,
+    "description": "Cinnamoroll is a shy but helpful pup who runs the mail delivery service on the island. He’s not on the plane at the beginning, but becomes available through the Delivery Service quest. Cinnamoroll loves cozy drinks, spicy treats, and all things chocolatey."
   },
   {
     id: 'my-melody',
     name: 'My Melody',
     series: 'My Melody',
     location: 'Flower Garden',
+    favoriteTags: ['cute', 'pink', 'flowers'],
     favoriteGifts: ['strawberry-cake', 'flower-crown', 'pink-bow'],
     friendshipLevel: 2,
     maxFriendshipLevel: 5,
-    description: 'A gentle rabbit who adores flowers and sweet strawberry treats.'
+    description: 'A gentle rabbit who adores flowers and sweet strawberry treats.',
+    giftGiven: 'strawberry-cake'
   },
   {
     id: 'kuromi',
     name: 'Kuromi',
     series: 'My Melody',
     location: 'Spooky Swamp',
+    favoriteTags: ['dark', 'mischievous', 'gothic'],
     favoriteGifts: ['dark-chocolate', 'skull-ring', 'gothic-dress'],
     friendshipLevel: 1,
     maxFriendshipLevel: 5,
-    description: 'A mischievous rabbit with a tough exterior but a soft heart inside.'
+    description: 'A mischievous rabbit with a tough exterior but a soft heart inside.',
+    giftGiven: 'dark-chocolate'
   },
   {
     id: 'pompompurin',
     name: 'Pompompurin',
     series: 'Pompompurin',
     location: 'Cozy Cafe',
+    favoriteTags: ['comfy', 'yellow', 'foodie'],
     favoriteGifts: ['custard-pudding', 'golden-hat', 'comfy-cushion'],
     friendshipLevel: 4,
     maxFriendshipLevel: 5,
-    description: 'A laid-back golden retriever who loves napping and delicious pudding.'
+    description: 'A laid-back golden retriever who loves napping and delicious pudding.',
+    giftGiven: 'custard-pudding'
   },
   {
     id: 'cinnamoroll',
     name: 'Cinnamoroll',
     series: 'Cinnamoroll',
     location: 'Cloud Kingdom',
+    favoriteTags: ['cute', 'fluffy', 'blue'],
     favoriteGifts: ['cinnamon-roll', 'fluffy-cloud', 'blue-bow'],
     friendshipLevel: 2,
     maxFriendshipLevel: 5,
-    description: 'A puppy who can fly through the sky and loves sweet cinnamon treats.'
+    description: 'A puppy who can fly through the sky and loves sweet cinnamon treats.',
+    giftGiven: 'cinnamon-roll'
   },
   {
     id: 'badtz-maru',
     name: 'Badtz-Maru',
     series: 'Badtz-Maru',
-    location: 'Rocky Shore',
     location: 'Mischief Bay',
+    favoriteTags: ['mischievous', 'cool', 'rebellious'],
     favoriteGifts: ['fish-burger', 'cool-sunglasses', 'rock-collection'],
     friendshipLevel: 1,
     maxFriendshipLevel: 5,
-    description: 'A mischievous penguin who dreams of being the boss of everything!'
+    description: 'A mischievous penguin who dreams of being the boss of everything!',
+    giftGiven: 'fish-burger'
   }
 ];
 
 export const gifts: Gift[] = [
+  {
+    "id": "red-bow-apple-pie",
+    "name": "Red Bow Apple Pie",
+    "category": "Bakery Fruit Fancy",
+    "friendshipPoints": 3,
+    "rarity": "Rare",
+    "description": "A special apple pie topped with a red bow, combining bakery, fruity, and fancy flavors.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Apple", "quantity": 1, "source": "Oven" },
+      { "name": "Magma Bloom", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "mamas-apple-pie",
+    "name": "Mama’s Apple Pie",
+    "category": "Bakery Fruit",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A classic apple pie made with love. A great starter gift.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Apple", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "strawberry-shortcake",
+    "name": "Strawberry Shortcake",
+    "category": "Bakery Fruit",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A sweet and fruity shortcake with strawberries.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Strawberry", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "fruity-cheesecake",
+    "name": "Fruity Cheesecake",
+    "category": "Bakery Cheese Fruit",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A rich cheesecake topped with a choice of fresh fruit.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Oven" },
+      { "name": "Fruit (Apple/Banana/Pineapple/Starfruit)", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "strawberry-cheesecake",
+    "name": "Strawberry Cheesecake",
+    "category": "Bakery Cheese Fruit",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A creamy cheesecake topped with strawberries.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Oven" },
+      { "name": "Strawberry", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "beignets-with-pineapple-dip",
+    "name": "Beignets with Pineapple Dip",
+    "category": "Bakery Sweet Fancy Tropical",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "Fluffy beignets paired with a sweet tropical pineapple dip.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Pineapple", "quantity": 1, "source": "Oven" },
+      { "name": "Candy Cloud", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "candied-banana-coffee",
+    "name": "Candied Banana Coffee",
+    "category": "Cozy Beverage Fruit Fancy Dessert",
+    "friendshipPoints": 2,
+    "rarity": "Rare",
+    "description": "A cozy beverage blending sweet banana with fancy coffee and candy notes.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Espresso Machine" },
+      { "name": "Banana", "quantity": 1, "source": "Espresso Machine" },
+      { "name": "Candy Cloud", "quantity": 1, "source": "Espresso Machine" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "fruit-tart",
+    "name": "Fruit Tart",
+    "category": "Bakery Egg Fruit",
+    "friendshipPoints": 2,
+    "rarity": "Rare",
+    "description": "A delicate tart filled with custard and topped with a selection of fresh fruits.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Egg", "quantity": 1, "source": "Oven" },
+      { "name": "Fruit (Apple/Banana/Pineapple/Starfruit/Strawberry)", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "chocolate-chai-latte",
+    "name": "Chocolate Chai Latte",
+    "category": "Coffee Chocolate Spicy",
+    "friendshipPoints": 3,
+    "rarity": "Rare",
+    "description": "Cinnamoroll's favorite drink — a cozy blend of chocolate and spicy chai. Requires Espresso Station upgrade.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
+      { "name": "Spice", "quantity": 1, "source": "Unknown or Wild Pickup" }
+    ],
+    "foundAt": ["Espresso Station"]
+  },
+  {
+    "id": "mocha",
+    "name": "Mocha",
+    "category": "Coffee Chocolate",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A reliable coffee gift with a sweet chocolate touch.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" }
+    ],
+    "foundAt": ["Espresso Station"]
+  },
+  {
+    "id": "chai",
+    "name": "Chai",
+    "category": "Coffee Spicy",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A spicy and comforting tea with bold flavor.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
+      { "name": "Spice", "quantity": 1, "source": "Wild Ingredient" }
+    ],
+    "foundAt": ["Espresso Station"]
+  },
+  {
+    "id": "volcano-cake",
+    "name": "Volcano Cake",
+    "category": "Chocolate Spicy Dessert",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A molten dessert with spicy chocolate filling.",
+    "craftingMaterials": [
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
+      { "name": "Spicy Ingredient", "quantity": 1, "source": "Wild Ingredient" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "hot-cocoa",
+    "name": "Hot Cocoa",
+    "category": "Chocolate Cozy Beverage",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "Warm and sweet — perfect for chilly adventures.",
+    "craftingMaterials": [
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
+      { "name": "Milk", "quantity": 1, "source": "Farm or Vendor" }
+    ],
+    "foundAt": ["Espresso Station"]
+  },
+  {
+    "id": "espresso",
+    "name": "Espresso",
+    "category": "Coffee",
+    "friendshipPoints": 2,
+    "rarity": "Common",
+    "description": "A strong shot of coffee — perfect to impress Cinnamoroll.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" }
+    ],
+    "foundAt": ["Espresso Station"]
+  },
+  {
+    "id": "molten-frappe",
+    "name": "Molten Frappe",
+    "category": "Chocolate Coffee Spicy",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A cold and spicy-sweet coffee drink with molten chocolate.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
+      { "name": "Spice", "quantity": 1, "source": "Wild Ingredient" }
+    ],
+    "foundAt": ["Espresso Station"]
+  },
+  {
+    "id": "spicy-pumpkin-cake",
+    "name": "Spicy Pumpkin Cake",
+    "category": "Spicy Dessert",
+    "friendshipPoints": 2,
+    "rarity": "Uncommon",
+    "description": "A seasonal spiced dessert — warm, fluffy, and loved by mail pups.",
+    "craftingMaterials": [
+      { "name": "Pumpkin", "quantity": 1, "source": "Farm or Wild" },
+      { "name": "Spice", "quantity": 1, "source": "Wild Ingredient" },
+      { "name": "Flour", "quantity": 1, "source": "Oven" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "interactive-history-of-chocolate",
+    "name": "Interactive History of Chocolate",
+    "category": "Book Device Chocolate",
+    "friendshipPoints": 10,
+    "rarity": "Rare",
+    "description": "A highly crafted book combining Chococat's favorite tags: Book, Device, and Chocolate.",
+    "craftingMaterials": [
+      { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
+      { "name": "Mechanism", "quantity": 1, "source": "Crafting" },
+      { "name": "Spark", "quantity": 1, "source": "Crafting" },
+      { "name": "Chocolate Coin", "quantity": 3, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "ancient-inventions",
+    "name": "Ancient Inventions",
+    "category": "Book Device",
+    "friendshipPoints": 7,
+    "rarity": "Rare",
+    "description": "An insightful gift tapping into Chococat’s love for books and devices.",
+    "craftingMaterials": [
+      { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
+      { "name": "Mechanism", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "glitchy-book",
+    "name": "Glitchy Book",
+    "category": "Book",
+    "friendshipPoints": 4,
+    "rarity": "Uncommon",
+    "description": "A quirky book with a corrupted twist — Chococat finds it oddly fascinating.",
+    "craftingMaterials": [
+      { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
+      { "name": "Glitch", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "meditations-on-resilience",
+    "name": "Meditations on Resilience",
+    "category": "Book",
+    "friendshipPoints": 4,
+    "rarity": "Uncommon",
+    "description": "A thoughtful read, ideal for Chococat's reflective moods.",
+    "craftingMaterials": [
+      { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
+      { "name": "Little Challenge", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "mocha-item",
+    "name": "Mocha (Item)",
+    "category": "Beverage Chocolate",
+    "friendshipPoints": 4,
+    "rarity": "Uncommon",
+    "description": "A sweet beverage made with candlenut and chocolate — delicious and tag-friendly.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Gathering" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafting" }
+    ]
+  },
   {
     id: 'apple-pie',
     name: 'Apple Pie',
@@ -298,6 +644,285 @@ export const gifts: Gift[] = [
     rarity: 'Common',
     description: 'A collection of interesting rocks and minerals.',
     foundAt: ['Rocky Shore', 'Gemstone Mountain', 'Cave Entrance in Underground']
+  }
+];
+
+export const tags: Tag[] = [
+  {
+    "id": "aquatic",
+    "name": "Aquatic",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "bakery",
+    "name": "Bakery",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "book",
+    "name": "Book",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "cheese",
+    "name": "Cheese",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "chocolate",
+    "name": "Chocolate",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "cloth",
+    "name": "Cloth",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "cloud",
+    "name": "Cloud",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "cozy-beverage",
+    "name": "Cozy Beverage",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "creative",
+    "name": "Creative",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "critters",
+    "name": "Critters",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "dairy",
+    "name": "Dairy",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "dessert",
+    "name": "Dessert",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "device",
+    "name": "Device",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "digital",
+    "name": "Digital",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "dreamy",
+    "name": "Dreamy",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "fall",
+    "name": "Fall",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "fancy",
+    "name": "Fancy",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "fire",
+    "name": "Fire",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "fish",
+    "name": "Fish",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "flower",
+    "name": "Flower",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "frozen",
+    "name": "Frozen",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "fruit",
+    "name": "Fruit",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "healthy",
+    "name": "Healthy",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "imagination",
+    "name": "Imagination",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "joke",
+    "name": "Joke",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "metal",
+    "name": "Metal",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "mochi",
+    "name": "Mochi",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "music",
+    "name": "Music",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "pink",
+    "name": "Pink",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "pizza",
+    "name": "Pizza",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "rainbow",
+    "name": "Rainbow",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "rare",
+    "name": "Rare",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "relax",
+    "name": "Relax",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "resilience",
+    "name": "Resilience",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "rocky",
+    "name": "Rocky",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "soda",
+    "name": "Soda",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "spice",
+    "name": "Spice",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "spooky",
+    "name": "Spooky",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "sports",
+    "name": "Sports",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "stars",
+    "name": "Stars",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "swampy",
+    "name": "Swampy",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "sweet",
+    "name": "Sweet",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "tropical",
+    "name": "Tropical",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "veggie",
+    "name": "Veggie",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "volcanic",
+    "name": "Volcanic",
+    "description": "",
+    "color": "#cccccc"
+  },
+  {
+    "id": "wood",
+    "name": "Wood",
+    "description": "",
+    "color": "#cccccc"
   }
 ];
 
