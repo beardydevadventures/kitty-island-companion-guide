@@ -7,7 +7,7 @@ export interface Character {
   series: string;
   location: string;
   favoriteTags: string[];
-  favoriteGifts: string[];
+  favoriteGifts: { giftId: string; hearts: number }[];
   giftGiven: string;
   friendshipLevel: number;
   maxFriendshipLevel: number;
@@ -18,7 +18,6 @@ export interface Gift {
   id: string;
   name: string;
   category: string;
-  friendshipPoints: number;
   rarity: string;
   description: string;
   craftingMaterials?: { name: string; quantity: number; source: string }[];
@@ -41,609 +40,1263 @@ export interface Location {
 
 export const characters: Character[] = [
   {
-    "id": "hello-kitty",
-    "name": "Hello Kitty",
-    "series": "Sanrio",
-    "location": "Seaside Resort (Cafe)",
-    "favoriteTags": ["fruity", "baked", "fancy"],
-    "favoriteGifts": [
-      "red-bow-apple-pie",
-      "mamas-apple-pie",
-      "strawberry-shortcake",
-      "candied-banana-coffee"
-    ],
-    "giftGiven": "Mama's Apple Pie",
-    "friendshipLevel": 1,
-    "maxFriendshipLevel": 20,
-    "description": "Hello Kitty is the first character you meet when starting the game. Described as a great listener, thoughtful gift-giver, and someone who loves to chat. Found in the cafe, she provides helpful baking tips. Likes gifts tagged with Fruity, Baked, and Fancy."
-  },
-  {
     "id": "chococat",
     "name": "Chococat",
-    "series": "Hello Kitty",
+    "series": "Hello Kitty Island Adventure",
     "location": "Seaside Resort",
-    "favoriteTags": ["Book", "Device", "Chocolate"],
+    "favoriteTags": ["device", "book", "chocolate"],
     "favoriteGifts": [
-      "interactive-history-of-chocolate",
-      "ancient-inventions",
-      "glitchy-book",
-      "meditations-on-resilience",
-      "mocha-item",
-      "hot-cocoa",
-      "boulder-bits-ice-cream",
-      "volcano-cake",
-      "blank-book"
+      {
+        "giftId": "interactive-history-of-chocolate",
+        "hearts": 3
+      },
+      {
+        "giftId": "ancient-inventions",
+        "hearts": 2
+      }
     ],
-    "giftGiven": "Gizmo",
+    "giftGiven": "gizmo",
     "friendshipLevel": 0,
     "maxFriendshipLevel": 15,
-    "description": "Chococat tends to be a little scatterbrained at times, but he has a curious mind and is always up on the latest news. He is a DIY genius and can help you craft tools and all sorts of trinkets. With you and Chococat on the case, there’s nothing you can’t solve together!"
+    "description": "Chococat loves going on adventures on the island, and is always eager to help! He tends to be a little scatterbrained at times, but he has a curious mind and is always up on the latest news. He is a DIY genius and can help you craft tools and all sorts of trinkets. With you and Chococat on the case, there’s nothing you can’t solve together!"
+  },
+  {
+    "id": "badtz-maru",
+    "name": "Badtz-maru",
+    "series": "Hello Kitty Island Adventure",
+    "location": "Seaside Resort",
+    "favoriteTags": ["joke", "tropical", "pizza"],
+    "favoriteGifts": [
+      {
+        "giftId": "ultimate-joke-pizza",
+        "hearts": 3
+      },
+      {
+        "giftId": "pineapple-pizza",
+        "hearts": 2
+      }
+    ],
+    "giftGiven": "paper",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Badtz-maru is the trickster of the group and is quick with a practical joke. When not playing video games, he likes to relax on the beach and go fishing. He runs the Comic and Bait Shop on the pier of Seaside Resort, helping players craft fishing tools and rewarding them for releasing fish."
   },
   {
     "id": "cinnamoroll",
     "name": "Cinnamoroll",
     "series": "Hello Kitty Island Adventure",
-    "location": "Unlocked during the Delivery Service quest after befriending Kuromi in Spooky Swamp",
-    "favoriteTags": ["Coffee", "Chocolate", "Spicy"],
+    "location": "Friendship Island",
+    "favoriteTags": ["cozy-beverage", "chocolate", "spice"],
     "favoriteGifts": [
-      "chocolate-chai-latte",
-      "mocha",
-      "chai",
-      "volcano-cake",
-      "hot-cocoa",
-      "espresso",
-      "molten-frappe",
-      "spicy-pumpkin-cake"
+      {
+        "giftId": "chocolate-chai",
+        "hearts": 3
+      },
+      {
+        "giftId": "chai",
+        "hearts": 2
+      },
+      {
+        "giftId": "espresso",
+        "hearts": 2
+      },
+      {
+        "giftId": "hot-cocoa",
+        "hearts": 2
+      },
+      {
+        "giftId": "mocha",
+        "hearts": 2
+      },
+      {
+        "giftId": "molten-frappe",
+        "hearts": 2
+      },
+      {
+        "giftId": "spicy-pumpkin-latte",
+        "hearts": 2
+      },
+      {
+        "giftId": "volcano-cake",
+        "hearts": 2
+      },
+      {
+        "giftId": "cinnamorolls-cocoa",
+        "hearts": 2
+      }
     ],
-    "giftGiven": "",
-    "friendshipLevel": 1,
+    "giftGiven": "candy cloud",
+    "friendshipLevel": 0,
     "maxFriendshipLevel": 20,
-    "description": "Cinnamoroll is a shy but helpful pup who runs the mail delivery service on the island. He’s not on the plane at the beginning, but becomes available through the Delivery Service quest. Cinnamoroll loves cozy drinks, spicy treats, and all things chocolatey."
+    "description": "Cinnamoroll is a sweet pup who always wants to help his friends when needed. He is quite shy but very friendly, and amazingly he can fly through the air by floating with his huge ears. He’s so fast, he can pick up and deliver anything around the island in a blink of an eye (even you)!"
   },
   {
-    id: 'my-melody',
-    name: 'My Melody',
-    series: 'My Melody',
-    location: 'Flower Garden',
-    favoriteTags: ['cute', 'pink', 'flowers'],
-    favoriteGifts: ['strawberry-cake', 'flower-crown', 'pink-bow'],
-    friendshipLevel: 2,
-    maxFriendshipLevel: 5,
-    description: 'A gentle rabbit who adores flowers and sweet strawberry treats.',
-    giftGiven: 'strawberry-cake'
+    "id": "hangyodon",
+    "name": "Hangyodon",
+    "series": "Hello Kitty Island Adventure",
+    "location": "rainbow-reef",
+    "favoriteTags": ["aquatic", "fish", "cloth"],
+    "favoriteGifts": [
+      {
+        "giftId": "mermaid-figure",
+        "hearts": 3
+      },
+      {
+        "giftId": "aquatic-material",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-aquatic-fish-cloth-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "candlenut",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 15,
+    "description": "Hangyodon is found around the Rainbow Reef, cleaning up the Rainbow Reef, and working on his \"tight ten\" for the next Open-Mic Comedy Night at Atlantis. Hangyodon runs the Comedy Club and helps you learn to explore the Rainbow Reef. He also helps you learn to use the Espresso Machine."
   },
   {
-    id: 'kuromi',
-    name: 'Kuromi',
-    series: 'My Melody',
-    location: 'Spooky Swamp',
-    favoriteTags: ['dark', 'mischievous', 'gothic'],
-    favoriteGifts: ['dark-chocolate', 'skull-ring', 'gothic-dress'],
-    friendshipLevel: 1,
-    maxFriendshipLevel: 5,
-    description: 'A mischievous rabbit with a tough exterior but a soft heart inside.',
-    giftGiven: 'dark-chocolate'
+    "id": "hello-kitty",
+    "name": "Hello Kitty",
+    "series": "Hello Kitty Island Adventure",
+    "location": "seaside-resort",
+    "favoriteTags": ["fruit", "bakery", "fancy"],
+    "favoriteGifts": [
+      {
+        "giftId": "red-bow-apple-pie",
+        "hearts": 3
+      },
+      {
+        "giftId": "mamas-apple-pie",
+        "hearts": 2
+      },
+      {
+        "giftId": "strawberry-shortcake",
+        "hearts": 2
+      },
+      {
+        "giftId": "fruity-cheesecake",
+        "hearts": 2
+      },
+      {
+        "giftId": "strawberry-cheesecake",
+        "hearts": 2
+      },
+      {
+        "giftId": "beignets-with-pineapple-dip",
+        "hearts": 2
+      },
+      {
+        "giftId": "candied-banana-coffee",
+        "hearts": 2
+      },
+      {
+        "giftId": "fruit-tart",
+        "hearts": 2
+      }
+    ],
+    "giftGiven": "tofu",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 25,
+    "description": "Hello Kitty has chosen to run the Cafe on the island. A great listener, a thoughtful gift-giver, and someone who loves a chat -- the Cafe is the right spot for her!"
   },
   {
-    id: 'pompompurin',
-    name: 'Pompompurin',
-    series: 'Pompompurin',
-    location: 'Cozy Cafe',
-    favoriteTags: ['comfy', 'yellow', 'foodie'],
-    favoriteGifts: ['custard-pudding', 'golden-hat', 'comfy-cushion'],
-    friendshipLevel: 4,
-    maxFriendshipLevel: 5,
-    description: 'A laid-back golden retriever who loves napping and delicious pudding.',
-    giftGiven: 'custard-pudding'
+    "id": "keroppi",
+    "name": "Keroppi",
+    "series": "Hello Kitty Island Adventure",
+    "location": "spooky-swamp",
+    "favoriteTags": ["critters", "swampy", "wood"],
+    "favoriteGifts": [
+      {
+        "giftId": "critter-totem",
+        "hearts": 3
+      },
+      {
+        "giftId": "swampy-souvenir-doll",
+        "hearts": 2
+      },
+      {
+        "giftId": "swampy-lamb-plush",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-critters-swampy-wood-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "sugarkelp",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 15,
+    "description": "Keroppi is so excited to be here with all the Critters. Always jumping from activity to activity, Keroppi's energy and enthusiasm have found a purpose here on the island."
   },
   {
-    id: 'cinnamoroll',
-    name: 'Cinnamoroll',
-    series: 'Cinnamoroll',
-    location: 'Cloud Kingdom',
-    favoriteTags: ['cute', 'fluffy', 'blue'],
-    favoriteGifts: ['cinnamon-roll', 'fluffy-cloud', 'blue-bow'],
-    friendshipLevel: 2,
-    maxFriendshipLevel: 5,
-    description: 'A puppy who can fly through the sky and loves sweet cinnamon treats.',
-    giftGiven: 'cinnamon-roll'
+    "id": "kuromi",
+    "name": "Kuromi",
+    "series": "Hello Kitty Island Adventure",
+    "location": "spooky-swamp",
+    "favoriteTags": ["soda", "fall", "spooky"],
+    "favoriteGifts": [
+      {
+        "giftId": "pumpkin-spice-soda",
+        "hearts": 3
+      },
+      {
+        "giftId": "spicy-pumpkin-latte",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-spooky-fall-soda-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "light-stone",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Kuromi is a master of the mystical, arcane, and mischievous. She hangs out in the Spooky Swamp, helps you restore the Haunted Mansion, and teaches potion brewing. She likes soda, fall, and spooky items."
   },
   {
-    id: 'badtz-maru',
-    name: 'Badtz-Maru',
-    series: 'Badtz-Maru',
-    location: 'Mischief Bay',
-    favoriteTags: ['mischievous', 'cool', 'rebellious'],
-    favoriteGifts: ['fish-burger', 'cool-sunglasses', 'rock-collection'],
-    friendshipLevel: 1,
-    maxFriendshipLevel: 5,
-    description: 'A mischievous penguin who dreams of being the boss of everything!',
-    giftGiven: 'fish-burger'
+    "id": "my-melody",
+    "name": "My Melody",
+    "series": "Hello Kitty Island Adventure",
+    "location": "seaside-resort",
+    "favoriteTags": ["sweet", "pink", "dreamy"],
+    "favoriteGifts": [
+      {
+        "giftId": "pink-clouds-ice-cream",
+        "hearts": 3
+      },
+      {
+        "giftId": "strawberry-almond-galette",
+        "hearts": 3
+      },
+      {
+        "giftId": "almond-pound-cake",
+        "hearts": 2
+      },
+      {
+        "giftId": "pink-latte",
+        "hearts": 2
+      },
+      {
+        "giftId": "pink-cloud",
+        "hearts": 2
+      },
+      {
+        "giftId": "sweet-dreams-stories",
+        "hearts": 2
+      }
+    ],
+    "giftGiven": "flour",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "My Melody runs the island’s gift shop and is passionate about handmade crafts and sweet gifts. She’ll help you restore bridges and cabins and offers dreamy, heartfelt decor at her store."
+  },
+  {
+    "id": "pekkle",
+    "name": "Pekkle",
+    "series": "Hello Kitty Island Adventure",
+    "location": "gemstone-mountain",
+    "favoriteTags": ["music", "rocky", "relax"],
+    "favoriteGifts": [
+      {
+        "giftId": "mountain-soundtrack",
+        "hearts": 3
+      },
+      {
+        "giftId": "rocky-music-box",
+        "hearts": 2
+      },
+      {
+        "giftId": "stacked-stones",
+        "hearts": 2
+      }
+    ],
+    "giftGiven": "feather",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 15,
+    "description": "A kind-natured fellow, Pekkle loves to sing and dance. You’ll find him in Gemstone Mountain trying to restore the Dance Hall and bring life back to the town with music and joy."
+  },
+  {
+    "id": "pochacco",
+    "name": "Pochacco",
+    "series": "Hello Kitty Island Adventure",
+    "location": "seaside-resort",
+    "favoriteTags": ["sports", "healthy", "veggie"],
+    "favoriteGifts": [
+      {
+        "giftId": "pochacco-energy-pop",
+        "hearts": 3
+      },
+      {
+        "giftId": "everything-pizza",
+        "hearts": 2
+      },
+      {
+        "giftId": "veggie-crepe",
+        "hearts": 2
+      }
+    ],
+    "giftGiven": "strawberry",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Pochacco loves athletics! Ever since finding the obstacle courses he's been obsessed with getting the best time on all of them! He’s a playful and curious pup who enjoys running, eating healthy treats, and helping you discover fun island activities like photography and challenges."
+  },
+  {
+    "id": "pompompurin",
+    "name": "Pompompurin",
+    "series": "Hello Kitty Island Adventure",
+    "location": "gemstone-mountain",
+    "favoriteTags": ["dessert", "relax", "dairy"],
+    "favoriteGifts": [
+      {
+        "giftId": "mamas-pudding",
+        "hearts": 3
+      },
+      {
+        "giftId": "cheese-ice-cream",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-dessert-relax-dairy-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "banana",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Pompompurin's good nature makes him an easy friend, and he loves to try out new foods or go on adventures. He runs the Dessert Boat and helps you explore the Mines and use the Dessert Machine to make tasty treats."
+  },
+  {
+    "id": "retsuko",
+    "name": "Retsuko",
+    "series": "Hello Kitty Island Adventure",
+    "location": "mount-hothead",
+    "favoriteTags": ["fire", "music", "metal"],
+    "favoriteGifts": [
+      {
+        "giftId": "volcanic-guitar",
+        "hearts": 3
+      },
+      {
+        "giftId": "volcano-soundtrack",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-fire-music-metal-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "dough",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Retsuko is a mild-mannered office worker, that is, until it's time to rock. Then all bets are off. She wanders Mount Hothead searching for her lost luggage. Though easily frustrated, she brings fiery energy and unforgettable rage-karaoke to her vacation."
+  },
+  {
+    "id": "tuxedosam",
+    "name": "Tuxedosam",
+    "series": "Hello Kitty Island Adventure",
+    "location": "seaside-resort",
+    "favoriteTags": ["cloth", "tropical", "fancy"],
+    "favoriteGifts": [
+      {
+        "giftId": "designer-island-doll",
+        "hearts": 3
+      },
+      {
+        "giftId": "tropical-gift",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-cloth-tropical-fancy-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "thread",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 15,
+    "description": "Tuxedosam is an avid collector of bow ties and has set up the clothing shop on the island. He runs a shop where you can buy clothes, change appearance, and eventually dye outfits. He has a keen eye for tropical, cloth, and fancy items."
+  },
+  {
+    "id": "wish-me-mell",
+    "name": "Wish me mell",
+    "series": "Hello Kitty Island Adventure",
+    "location": "Merry Meadow",
+    "favoriteTags": ["fire", "flower", "rare"],
+    "favoriteGifts": [
+      { "giftId": "rare-candle", "hearts": 3 },
+      { "giftId": "flower-candle", "hearts": 2 }
+    ],
+    "giftGiven": "Honeycomb",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Wish me mell is friendly, with a good heart. She's a little clumsy, loves to write letters, and to garden in the Merry Meadow."
+  },
+  {
+    "id": "my-sweet-piano",
+    "name": "My Sweet Piano",
+    "series": "Hello Kitty Island Adventure",
+    "location": "Seaside Resort, City Town",
+    "favoriteTags": ["cloud", "wood", "creative"],
+    "favoriteGifts": [
+      { "giftId": "colorful-lamb-plush", "hearts": 3 },
+      { "giftId": "lamb-plush", "hearts": 2 }
+    ],
+    "giftGiven": "Wool",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "My Sweet Piano is a kind and gentle sheep with fluffy pink wool. She's best friends with My Melody and she plays the piano! She helps run the Small Gift Big Smile store and later opens a customization shop for Visitor Cabins and Plush Pals. Creative and cheerful, she loves to spread joy through crafts and music."
+  },
+  {
+    "id": "big-challenges",
+    "name": "Big Challenges",
+    "series": "Hello Kitty Island Adventure",
+    "location": "Seaside Resort",
+    "favoriteTags": ["volcanic", "resilience", "book"],
+    "favoriteGifts": [
+      {
+        "giftId": "the-greatest-challenge",
+        "hearts": 3
+      },
+      {
+        "giftId": "meditations-on-resilience",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-volcanic-resilience-book-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "Little Challenge",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Big Challenges mysteriously disappeared years ago, waiting to be discovered by a wandering adventurer. Adventurous and outgoing, he dreams of building a roller coaster on Icy Peak and loves trying bold, daring things—often with his best friend TOPHAT by his side."
+  },
+  {
+    "id": "tophat",
+    "name": "TOPHAT",
+    "series": "Hello Kitty Island Adventure",
+    "location": "Seaside Resort",
+    "favoriteTags": ["digital", "fancy", "stars"],
+    "favoriteGifts": [
+      {
+        "giftId": "the-future-of-everything",
+        "hearts": 3
+      },
+      {
+        "giftId": "computer",
+        "hearts": 2
+      },
+      {
+        "giftId": "any-digital-fancy-stars-item",
+        "hearts": 1
+      }
+    ],
+    "giftGiven": "Glitch",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 10,
+    "description": "A mysterious supercomputer who deeply cares about his friend Big Challenges. He often worries and is still recovering lost memories after the Power Crystals restoration. Despite his missing feet, he's known for his unique backstroke swimming style."
+  },
+  {
+    "id": "lala",
+    "name": "Lala",
+    "series": "Little Twin Stars",
+    "location": "Cloud Island",
+    "favoriteTags": ["creative", "dreamy", "cheese"],
+    "favoriteGifts": [
+      { "giftId": "quattro-formaggi-pizza", "hearts": 3 },
+      { "giftId": "cheese-cloud", "hearts": 2 },
+      { "giftId": "three-cheese-pizza", "hearts": 2 },
+      { "giftId": "art-supplies", "hearts": 2 }
+    ],
+    "giftGiven": "stardust",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Lala is the older sister of Kiki, the two being the inseparable Little Twin Stars and benefactors of the island. Lala can be a little timid, and she loves drawing, writing poems, and cooking! She tries to plan ahead to avoid trouble. Even when she and Kiki fight, they always make up quickly."
+  },
+  {
+    "id": "kiki",
+    "name": "Kiki",
+    "series": "Little Twin Stars",
+    "location": "Cloud Island",
+    "favoriteTags": ["stars", "dreamy", "frozen"],
+    "favoriteGifts": [
+      { "giftId": "starry-skies-shake", "hearts": 3 },
+      { "giftId": "dreamy-star", "hearts": 2 },
+      { "giftId": "art-supplies", "hearts": 2 },
+      { "giftId": "pastel-rainbow-banister", "hearts": 2 },
+      { "giftId": "decorative-cloud-cart", "hearts": 2 }
+    ],
+    "giftGiven": "stardust",
+    "friendshipLevel": 0,
+    "maxFriendshipLevel": 20,
+    "description": "Kiki is the younger brother of Lala and one of the inseparable Little Twin Stars. Curious and inventive, he loves star-fishing and exploring. Despite his cheekiness, he looks out for Lala and tries to protect her, though his curiosity sometimes gets them into trouble."
   }
 ];
 
 export const gifts: Gift[] = [
   {
-    "id": "red-bow-apple-pie",
-    "name": "Red Bow Apple Pie",
-    "category": "Bakery Fruit Fancy",
-    "friendshipPoints": 3,
-    "rarity": "Rare",
-    "description": "A special apple pie topped with a red bow, combining bakery, fruity, and fancy flavors.",
-    "craftingMaterials": [
-      { "name": "Flour", "quantity": 1, "source": "Oven" },
-      { "name": "Apple", "quantity": 1, "source": "Oven" },
-      { "name": "Magma Bloom", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "mamas-apple-pie",
-    "name": "Mama’s Apple Pie",
-    "category": "Bakery Fruit",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A classic apple pie made with love. A great starter gift.",
-    "craftingMaterials": [
-      { "name": "Flour", "quantity": 1, "source": "Oven" },
-      { "name": "Apple", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "strawberry-shortcake",
-    "name": "Strawberry Shortcake",
-    "category": "Bakery Fruit",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A sweet and fruity shortcake with strawberries.",
-    "craftingMaterials": [
-      { "name": "Flour", "quantity": 1, "source": "Oven" },
-      { "name": "Strawberry", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "fruity-cheesecake",
-    "name": "Fruity Cheesecake",
-    "category": "Bakery Cheese Fruit",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A rich cheesecake topped with a choice of fresh fruit.",
-    "craftingMaterials": [
-      { "name": "Flour", "quantity": 1, "source": "Oven" },
-      { "name": "Moon Cheese", "quantity": 1, "source": "Oven" },
-      { "name": "Fruit (Apple/Banana/Pineapple/Starfruit)", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "strawberry-cheesecake",
-    "name": "Strawberry Cheesecake",
-    "category": "Bakery Cheese Fruit",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A creamy cheesecake topped with strawberries.",
-    "craftingMaterials": [
-      { "name": "Flour", "quantity": 1, "source": "Oven" },
-      { "name": "Moon Cheese", "quantity": 1, "source": "Oven" },
-      { "name": "Strawberry", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "beignets-with-pineapple-dip",
-    "name": "Beignets with Pineapple Dip",
-    "category": "Bakery Sweet Fancy Tropical",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "Fluffy beignets paired with a sweet tropical pineapple dip.",
-    "craftingMaterials": [
-      { "name": "Flour", "quantity": 1, "source": "Oven" },
-      { "name": "Pineapple", "quantity": 1, "source": "Oven" },
-      { "name": "Candy Cloud", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "candied-banana-coffee",
-    "name": "Candied Banana Coffee",
-    "category": "Cozy Beverage Fruit Fancy Dessert",
-    "friendshipPoints": 2,
-    "rarity": "Rare",
-    "description": "A cozy beverage blending sweet banana with fancy coffee and candy notes.",
-    "craftingMaterials": [
-      { "name": "Candlenut", "quantity": 1, "source": "Espresso Machine" },
-      { "name": "Banana", "quantity": 1, "source": "Espresso Machine" },
-      { "name": "Candy Cloud", "quantity": 1, "source": "Espresso Machine" }
-    ],
-    "foundAt": ["Espresso Machine"]
-  },
-  {
-    "id": "fruit-tart",
-    "name": "Fruit Tart",
-    "category": "Bakery Egg Fruit",
-    "friendshipPoints": 2,
-    "rarity": "Rare",
-    "description": "A delicate tart filled with custard and topped with a selection of fresh fruits.",
-    "craftingMaterials": [
-      { "name": "Flour", "quantity": 1, "source": "Oven" },
-      { "name": "Egg", "quantity": 1, "source": "Oven" },
-      { "name": "Fruit (Apple/Banana/Pineapple/Starfruit/Strawberry)", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "chocolate-chai-latte",
-    "name": "Chocolate Chai Latte",
-    "category": "Coffee Chocolate Spicy",
-    "friendshipPoints": 3,
-    "rarity": "Rare",
-    "description": "Cinnamoroll's favorite drink — a cozy blend of chocolate and spicy chai. Requires Espresso Station upgrade.",
-    "craftingMaterials": [
-      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
-      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
-      { "name": "Spice", "quantity": 1, "source": "Unknown or Wild Pickup" }
-    ],
-    "foundAt": ["Espresso Station"]
-  },
-  {
-    "id": "mocha",
-    "name": "Mocha",
-    "category": "Coffee Chocolate",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A reliable coffee gift with a sweet chocolate touch.",
-    "craftingMaterials": [
-      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
-      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" }
-    ],
-    "foundAt": ["Espresso Station"]
-  },
-  {
-    "id": "chai",
-    "name": "Chai",
-    "category": "Coffee Spicy",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A spicy and comforting tea with bold flavor.",
-    "craftingMaterials": [
-      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
-      { "name": "Spice", "quantity": 1, "source": "Wild Ingredient" }
-    ],
-    "foundAt": ["Espresso Station"]
-  },
-  {
-    "id": "volcano-cake",
-    "name": "Volcano Cake",
-    "category": "Chocolate Spicy Dessert",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A molten dessert with spicy chocolate filling.",
-    "craftingMaterials": [
-      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
-      { "name": "Spicy Ingredient", "quantity": 1, "source": "Wild Ingredient" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
-    "id": "hot-cocoa",
-    "name": "Hot Cocoa",
-    "category": "Chocolate Cozy Beverage",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "Warm and sweet — perfect for chilly adventures.",
-    "craftingMaterials": [
-      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
-      { "name": "Milk", "quantity": 1, "source": "Farm or Vendor" }
-    ],
-    "foundAt": ["Espresso Station"]
-  },
-  {
-    "id": "espresso",
-    "name": "Espresso",
-    "category": "Coffee",
-    "friendshipPoints": 2,
-    "rarity": "Common",
-    "description": "A strong shot of coffee — perfect to impress Cinnamoroll.",
-    "craftingMaterials": [
-      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" }
-    ],
-    "foundAt": ["Espresso Station"]
-  },
-  {
-    "id": "molten-frappe",
-    "name": "Molten Frappe",
-    "category": "Chocolate Coffee Spicy",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A cold and spicy-sweet coffee drink with molten chocolate.",
-    "craftingMaterials": [
-      { "name": "Candlenut", "quantity": 1, "source": "Espresso Station" },
-      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafted or Found" },
-      { "name": "Spice", "quantity": 1, "source": "Wild Ingredient" }
-    ],
-    "foundAt": ["Espresso Station"]
-  },
-  {
-    "id": "spicy-pumpkin-cake",
-    "name": "Spicy Pumpkin Cake",
-    "category": "Spicy Dessert",
-    "friendshipPoints": 2,
-    "rarity": "Uncommon",
-    "description": "A seasonal spiced dessert — warm, fluffy, and loved by mail pups.",
-    "craftingMaterials": [
-      { "name": "Pumpkin", "quantity": 1, "source": "Farm or Wild" },
-      { "name": "Spice", "quantity": 1, "source": "Wild Ingredient" },
-      { "name": "Flour", "quantity": 1, "source": "Oven" }
-    ],
-    "foundAt": ["Oven"]
-  },
-  {
     "id": "interactive-history-of-chocolate",
     "name": "Interactive History of Chocolate",
-    "category": "Book Device Chocolate",
-    "friendshipPoints": 10,
+    "category": "Book",
     "rarity": "Rare",
-    "description": "A highly crafted book combining Chococat's favorite tags: Book, Device, and Chocolate.",
+    "description": "A rare crafted book combining chocolate and historical inventions.",
     "craftingMaterials": [
-      { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
-      { "name": "Mechanism", "quantity": 1, "source": "Crafting" },
-      { "name": "Spark", "quantity": 1, "source": "Crafting" },
-      { "name": "Chocolate Coin", "quantity": 3, "source": "Crafting" }
+      { "name": "Blank Book", "quantity": 1, "source": "Crafting Table" },
+      { "name": "Mechanism", "quantity": 1, "source": "Crafting Table" },
+      { "name": "Spark", "quantity": 1, "source": "Crafting Table" },
+      { "name": "Chocolate Coin", "quantity": 3, "source": "Various" }
     ]
   },
   {
     "id": "ancient-inventions",
     "name": "Ancient Inventions",
-    "category": "Book Device",
-    "friendshipPoints": 7,
+    "category": "Book",
     "rarity": "Rare",
-    "description": "An insightful gift tapping into Chococat’s love for books and devices.",
+    "description": "A compendium of old-world devices and ideas.",
+    "craftingMaterials": [
+      { "name": "Blank Book", "quantity": 1, "source": "Crafting Table" },
+      { "name": "Mechanism", "quantity": 1, "source": "Crafting Table" }
+    ]
+  },
+  {
+    "id": "ultimate-joke-pizza",
+    "name": "Ultimate Joke Pizza",
+    "category": "Pizza",
+    "rarity": "Legendary",
+    "description": "The funniest pizza with tropical ingredients.",
+    "craftingMaterials": [
+      { "name": "Dough", "quantity": 1, "source": "Pizza Oven" },
+      { "name": "Tofu", "quantity": 1, "source": "Various" },
+      { "name": "Pineapple", "quantity": 1, "source": "Tropical Areas" }
+    ]
+  },
+  {
+    "id": "pineapple-pizza",
+    "name": "Pineapple Pizza",
+    "category": "Food",
+    "rarity": "Uncommon",
+    "description": "A tropical twist on a classic dish.",
+    "craftingMaterials": [
+      { "name": "Dough", "quantity": 1, "source": "Pizza Oven" },
+      { "name": "Pineapple", "quantity": 1, "source": "Tropical Areas" }
+    ]
+  },
+  {
+    "id": "chocolate-chai",
+    "name": "Chocolate Chai",
+    "category": "cozy beverage",
+    "rarity": "Uncommon",
+    "description": "A warm and rich drink combining the sweetness of chocolate with spiced chai flavors. One of Cinnamoroll’s top favorites.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Found near hot springs or purchased from visitors" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Found around Cozy Islands or crafted" },
+      { "name": "Magma Bloom", "quantity": 1, "source": "Harvested from volcanic biomes" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "chai",
+    "name": "Chai",
+    "category": "cozy beverage",
+    "rarity": "Uncommon",
+    "description": "A comforting blend of spices and warmth. A strong 2-heart gift for Cinnamoroll.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Found near hot springs or purchased from visitors" },
+      { "name": "Magma Bloom", "quantity": 1, "source": "Harvested from volcanic biomes" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "espresso",
+    "name": "Espresso",
+    "category": "cozy beverage",
+    "rarity": "Uncommon",
+    "description": "A strong, spicy boost for chilly days. Cinnamoroll enjoys this fiery drink.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Found near hot springs or purchased from visitors" },
+      { "name": "Cinna Bloom", "quantity": 1, "source": "Grown in cozy climates" },
+      { "name": "Magma Bloom", "quantity": 1, "source": "Harvested from volcanic biomes" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "hot-cocoa",
+    "name": "Hot Cocoa",
+    "category": "cozy beverage",
+    "rarity": "Uncommon",
+    "description": "A relaxing, chocolatey drink that warms the heart. Well liked by Cinnamoroll.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Found near hot springs or purchased from visitors" },
+      { "name": "Coral Milk", "quantity": 1, "source": "Harvested from coral environments" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Found around Cozy Islands or crafted" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "mocha",
+    "name": "Mocha",
+    "category": "cozy beverage",
+    "rarity": "Uncommon",
+    "description": "A rich blend of coffee and chocolate that Cinnamoroll finds comforting.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Found near hot springs or purchased from visitors" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Found around Cozy Islands or crafted" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "molten-frappe",
+    "name": "Molten Frappe",
+    "category": "cozy beverage",
+    "rarity": "Uncommon",
+    "description": "A spicy frozen drink with volcanic flare. Popular with Cinnamoroll.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Found near hot springs or purchased from visitors" },
+      { "name": "Snowcicle", "quantity": 1, "source": "Found in snowy zones" },
+      { "name": "Magma Bloom", "quantity": 1, "source": "Harvested from volcanic biomes" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "spicy-pumpkin-latte",
+    "name": "Spicy Pumpkin Latte",
+    "category": "cozy beverage",
+    "rarity": "Rare",
+    "description": "A cozy, spicy seasonal drink. A big hit with Cinnamoroll.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Found near hot springs or purchased from visitors" },
+      { "name": "Cinna Bloom", "quantity": 1, "source": "Grown in cozy climates" },
+      { "name": "Pumpkin", "quantity": 1, "source": "Harvested in autumn areas" }
+    ],
+    "foundAt": ["Espresso Machine"]
+  },
+  {
+    "id": "volcano-cake",
+    "name": "Volcano Cake",
+    "category": "bakery",
+    "rarity": "Rare",
+    "description": "A decadent, chocolatey treat with a molten twist. Cinnamoroll enjoys this sweet option.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Crafted or found near Bakery areas" },
+      { "name": "Chocolate Coin", "quantity": 1, "source": "Found around Cozy Islands or crafted" },
+      { "name": "Magma Bloom", "quantity": 1, "source": "Harvested from volcanic biomes" }
+    ],
+    "foundAt": ["Oven"]
+  },
+  {
+    "id": "cinnamorolls-cocoa",
+    "name": "Cinnamoroll’s Cocoa",
+    "category": "chocolate beverage",
+    "rarity": "Rare",
+    "description": "Cinnamoroll’s signature drink made with Hot Cocoa, Swampmallows, and Stardust. A rare and heartfelt gift.",
+    "craftingMaterials": [
+      { "name": "Hot Cocoa", "quantity": 1, "source": "Crafted via Espresso Machine" },
+      { "name": "Swampmallow", "quantity": 5, "source": "Found in marshy areas" },
+      { "name": "Stardust", "quantity": 10, "source": "Collected from star-themed biomes or events" }
+    ],
+    "foundAt": ["Creation Station"]
+  },
+  {
+    "id": "mermaid-figure",
+    "name": "Mermaid Figure",
+    "category": "Crafted",
+    "rarity": "Rare",
+    "description": "A beautifully made figure of a mermaid, loved by Hangyodon.",
+    "craftingMaterials": [
+      { "name": "Seashell", "quantity": 5, "source": "Gathering" },
+      { "name": "Pineapple", "quantity": 3, "source": "Harvesting" },
+      { "name": "Fabric", "quantity": 2, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "aquatic-material",
+    "name": "Aquatic Material",
+    "category": "Crafted",
+    "rarity": "Uncommon",
+    "description": "A soft material inspired by the ocean, perfect for Hangyodon.",
+    "craftingMaterials": [
+      { "name": "Seashell", "quantity": 5, "source": "Gathering" },
+      { "name": "Feather", "quantity": 3, "source": "Gathering" },
+      { "name": "Fabric", "quantity": 2, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "red-bow-apple-pie",
+    "name": "Red Bow Apple Pie",
+    "category": "Bakery",
+    "rarity": "Rare",
+    "description": "A beautifully baked apple pie with Hello Kitty's signature red bow.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Apple", "quantity": 1, "source": "Harvesting" },
+      { "name": "Magma Bloom", "quantity": 1, "source": "Gathering" }
+    ]
+  },
+  {
+    "id": "mamas-apple-pie",
+    "name": "Mama’s Apple Pie",
+    "category": "Bakery",
+    "rarity": "Uncommon",
+    "description": "A warm, comforting pie just like Mama used to make.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Apple", "quantity": 1, "source": "Harvesting" }
+    ]
+  },
+  {
+    "id": "strawberry-shortcake",
+    "name": "Strawberry Shortcake",
+    "category": "Bakery",
+    "rarity": "Uncommon",
+    "description": "A soft and sweet dessert topped with fresh strawberries.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Strawberry", "quantity": 1, "source": "Harvesting" }
+    ]
+  },
+  {
+    "id": "fruity-cheesecake",
+    "name": "Fruity Cheesecake",
+    "category": "Bakery",
+    "rarity": "Uncommon",
+    "description": "A creamy cheesecake topped with your favorite fruit.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Crafting" },
+      { "name": "Fruit (Starfruit / Banana / Apple / Pineapple)", "quantity": 1, "source": "Harvesting" }
+    ]
+  },
+  {
+    "id": "strawberry-cheesecake",
+    "name": "Strawberry Cheesecake",
+    "category": "Bakery",
+    "rarity": "Uncommon",
+    "description": "A smooth cheesecake with a sweet strawberry topping.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Crafting" },
+      { "name": "Strawberry", "quantity": 1, "source": "Harvesting" }
+    ]
+  },
+  {
+    "id": "beignets-with-pineapple-dip",
+    "name": "Beignets with Pineapple Dip",
+    "category": "Bakery",
+    "rarity": "Uncommon",
+    "description": "Fluffy beignets served with a sweet and tropical dip.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Pineapple", "quantity": 1, "source": "Harvesting" },
+      { "name": "Candy Cloud", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "candied-banana-coffee",
+    "name": "Candied Banana Coffee",
+    "category": "Beverage",
+    "rarity": "Rare",
+    "description": "A rich, sweet coffee blend with hints of banana and candy.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Crafting" },
+      { "name": "Banana", "quantity": 1, "source": "Harvesting" },
+      { "name": "Candy Cloud", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "fruit-tart",
+    "name": "Fruit Tart",
+    "category": "Bakery",
+    "rarity": "Rare",
+    "description": "A colorful tart topped with a variety of fresh fruits.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Oven" },
+      { "name": "Egg", "quantity": 1, "source": "Gathering" },
+      { "name": "Fruit (Apple / Banana / Pineapple / Starfruit / Strawberry)", "quantity": 1, "source": "Harvesting" }
+    ]
+  },
+  {
+    "id": "critter-totem",
+    "name": "Critter Totem",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A hand-carved wooden totem honoring swamp critters.",
+    "craftingMaterials": [
+      { "name": "Woodblock", "quantity": 1, "source": "Crafting" },
+      { "name": "Coconut", "quantity": 3, "source": "Harvesting" },
+      { "name": "Mushroom", "quantity": 5, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "swampy-souvenir-doll",
+    "name": "Swampy Souvenir Doll",
+    "category": "Crafting",
+    "rarity": "Uncommon",
+    "description": "A small wooden doll made from swampy materials.",
+    "craftingMaterials": [
+      { "name": "Fabric", "quantity": 1, "source": "Crafting" },
+      { "name": "Woodblock", "quantity": 1, "source": "Crafting" },
+      { "name": "Mushroom", "quantity": 5, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "swampy-lamb-plush",
+    "name": "Swampy Lamb Plush",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A soft and cozy plush made with swampy fabric.",
+    "craftingMaterials": [
+      { "name": "Lamb Plush", "quantity": 1, "source": "Crafting" },
+      { "name": "Swampy Material", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "pumpkin-spice-soda",
+    "name": "Pumpkin Spice Soda",
+    "category": "Soda Machine",
+    "rarity": "Rare",
+    "description": "A fizzy spooky soda with the perfect fall flavor.",
+    "craftingMaterials": [
+      { "name": "Pumpkin", "quantity": 1, "source": "Harvesting" },
+      { "name": "Fizzy Crystal", "quantity": 1, "source": "Crafting" },
+      { "name": "Cinna Bloom", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "spicy-pumpkin-latte",
+    "name": "Spicy Pumpkin Latte",
+    "category": "Espresso Machine",
+    "rarity": "Rare",
+    "description": "A warm and spicy latte full of fall flavors.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Harvesting" },
+      { "name": "Cinna Bloom", "quantity": 1, "source": "Foraging" },
+      { "name": "Pumpkin", "quantity": 1, "source": "Harvesting" }
+    ]
+  },
+  {
+    "id": "pink-clouds-ice-cream",
+    "name": "Pink Clouds Ice Cream",
+    "category": "Dessert Machine",
+    "rarity": "Uncommon",
+    "description": "A fluffy, dreamy dessert made with clouds and pink sweetness.",
+    "craftingMaterials": [
+      { "name": "Cactus Cream", "quantity": 1, "source": "Crafting" },
+      { "name": "Candy Cloud", "quantity": 1, "source": "Harvesting" },
+      { "name": "Sakura", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "strawberry-almond-galette",
+    "name": "Strawberry Almond Galette",
+    "category": "Oven",
+    "rarity": "Rare",
+    "description": "A beautiful pastry with a fruity and nutty filling.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Crafting" },
+      { "name": "Strawberry", "quantity": 1, "source": "Foraging" },
+      { "name": "Toasted Almond", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "almond-pound-cake",
+    "name": "Almond Pound Cake",
+    "category": "Oven",
+    "rarity": "Uncommon",
+    "description": "A dense dreamy cake with almond notes and sweet icing.",
+    "craftingMaterials": [
+      { "name": "Flour", "quantity": 1, "source": "Crafting" },
+      { "name": "Candy Cloud", "quantity": 1, "source": "Harvesting" },
+      { "name": "Toasted Almond", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "pink-latte",
+    "name": "Pink Latte",
+    "category": "Espresso Machine",
+    "rarity": "Uncommon",
+    "description": "A warm beverage with a sweet pink twist.",
+    "craftingMaterials": [
+      { "name": "Candlenut", "quantity": 1, "source": "Foraging" },
+      { "name": "Strawberry or Sakura", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "pink-cloud",
+    "name": "Pink Cloud",
+    "category": "Candy Cloud Machine",
+    "rarity": "Uncommon",
+    "description": "A sugary cloud of pink sweetness.",
+    "craftingMaterials": [
+      { "name": "Candy Cloud", "quantity": 1, "source": "Harvesting" },
+      { "name": "Strawberry or Sakura", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "sweet-dreams-stories",
+    "name": "Sweet Dreams Stories",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A dreamy storybook filled with gentle tales.",
     "craftingMaterials": [
       { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
+      { "name": "Feather", "quantity": 5, "source": "Foraging" },
+      { "name": "Star", "quantity": 1, "source": "Exploration" }
+    ]
+  },
+  {
+    "id": "mountain-soundtrack",
+    "name": "Mountain Soundtrack",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A musical track inspired by the peacefulness and strength of the mountains.",
+    "craftingMaterials": [
+      { "name": "Mechanism", "quantity": 1, "source": "Crafting" },
+      { "name": "Feather", "quantity": 5, "source": "Gift Reward" },
+      { "name": "Shiny", "quantity": 5, "source": "Exploration" }
+    ]
+  },
+  {
+    "id": "rocky-music-box",
+    "name": "Rocky Music Box",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A music box that plays rocky tunes — perfect for relaxing by the mountain.",
+    "craftingMaterials": [
+      { "name": "Mechanism", "quantity": 1, "source": "Crafting" },
+      { "name": "Ingot", "quantity": 1, "source": "Forging" },
+      { "name": "Shiny", "quantity": 5, "source": "Exploration" }
+    ]
+  },
+  {
+    "id": "stacked-stones",
+    "name": "Stacked Stones",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A tranquil rock sculpture meant to inspire calm and balance.",
+    "craftingMaterials": [
+      { "name": "Calming Crystal", "quantity": 3, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "pochacco-energy-pop",
+    "name": "Pochacco Energy Pop",
+    "category": "Soda Machine",
+    "rarity": "Uncommon",
+    "description": "A fizzy drink packed with veggie power and energy, perfect for an athletic boost.",
+    "craftingMaterials": [
+      { "name": "Fizzy Crystal", "quantity": 1, "source": "Soda Machine" },
+      { "name": "Tofu", "quantity": 1, "source": "Cooking" },
+      { "name": "Spinip", "quantity": 1, "source": "Gardening" }
+    ]
+  },
+  {
+    "id": "everything-pizza",
+    "name": "Everything Pizza",
+    "category": "Pizza Oven",
+    "rarity": "Rare",
+    "description": "A delicious and balanced pizza packed with veggies and nutrition.",
+    "craftingMaterials": [
+      { "name": "Dough", "quantity": 1, "source": "Cooking" },
+      { "name": "Spinip", "quantity": 1, "source": "Gardening" },
+      { "name": "Tofu", "quantity": 1, "source": "Cooking" }
+    ]
+  },
+  {
+    "id": "veggie-crepe",
+    "name": "Veggie Crepe",
+    "category": "Egg Pan Station",
+    "rarity": "Rare",
+    "description": "A light and healthy crepe filled with fresh garden vegetables.",
+    "craftingMaterials": [
+      { "name": "Egg", "quantity": 1, "source": "Foraging" },
+      { "name": "Flour", "quantity": 1, "source": "Cooking" },
+      { "name": "Spinip", "quantity": 1, "source": "Gardening" }
+    ]
+  },
+  {
+    "id": "mamas-pudding",
+    "name": "Mama's Pudding",
+    "category": "Dessert Machine",
+    "rarity": "Uncommon",
+    "description": "A creamy pudding made with love, soft and soothing—just like Pompompurin prefers.",
+    "craftingMaterials": [
+      { "name": "Cactus Cream", "quantity": 1, "source": "Dessert Machine" },
+      { "name": "Coral Milk", "quantity": 1, "source": "Foraging" },
+      { "name": "Banana", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "cheese-ice-cream",
+    "name": "Cheese Ice Cream",
+    "category": "Dessert Machine",
+    "rarity": "Uncommon",
+    "description": "A dreamy scoop of cheese-flavored ice cream, chilled to perfection.",
+    "craftingMaterials": [
+      { "name": "Cactus Cream", "quantity": 1, "source": "Dessert Machine" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "volcanic-guitar",
+    "name": "Volcanic Guitar",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A blazing-hot guitar perfect for metal solos by the lava flow.",
+    "craftingMaterials": [
+      { "name": "Ingot", "quantity": 2, "source": "Crafting" },
+      { "name": "Spark", "quantity": 2, "source": "Crafting" },
       { "name": "Mechanism", "quantity": 1, "source": "Crafting" }
     ]
   },
   {
-    "id": "glitchy-book",
-    "name": "Glitchy Book",
-    "category": "Book",
-    "friendshipPoints": 4,
-    "rarity": "Uncommon",
-    "description": "A quirky book with a corrupted twist — Chococat finds it oddly fascinating.",
+    "id": "volcano-soundtrack",
+    "name": "Volcano Soundtrack",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "The roaring soundtrack of molten rock and guitar riffs.",
     "craftingMaterials": [
-      { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
-      { "name": "Glitch", "quantity": 1, "source": "Crafting" }
+      { "name": "Mechanism", "quantity": 1, "source": "Crafting" },
+      { "name": "Toasted Almond", "quantity": 5, "source": "Foraging" },
+      { "name": "Obsidian Shard", "quantity": 5, "source": "Mining" }
+    ]
+  },
+  {
+    "id": "designer-island-doll",
+    "name": "Designer Island Doll",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A classy collectible doll made from fine materials.",
+    "craftingMaterials": [
+      { "name": "Sand Dollar", "quantity": 5, "source": "Foraging" },
+      { "name": "Fabric", "quantity": 2, "source": "Crafting" },
+      { "name": "Gift Box", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "tropical-gift",
+    "name": "Tropical Gift",
+    "category": "Crafting",
+    "rarity": "Uncommon",
+    "description": "A vibrant gift box filled with tropical charm and elegance.",
+    "craftingMaterials": [
+      { "name": "Gift Box", "quantity": 1, "source": "Crafting" },
+      { "name": "Sand Dollar", "quantity": 10, "source": "Foraging" }
+    ]
+  },
+  {
+    "id": "rare-candle",
+    "name": "Rare Candle",
+    "category": "Crafted",
+    "rarity": "Rare",
+    "description": "A candle made with rare patterned flowers, radiating a gentle warmth.",
+    "craftingMaterials": [
+      {
+        "name": "Beeswax",
+        "quantity": 5,
+        "source": "Creation Station"
+      },
+      {
+        "name": "Patterned Flowers",
+        "quantity": 5,
+        "source": "Creation Station"
+      }
+    ]
+  },
+  {
+    "id": "flower-candle",
+    "name": "Flower Candle",
+    "category": "Crafted",
+    "rarity": "Rare",
+    "description": "A soothing candle infused with floral scents, handcrafted for relaxing vibes.",
+    "craftingMaterials": [
+      {
+        "name": "Beeswax",
+        "quantity": 5,
+        "source": "Creation Station"
+      },
+      {
+        "name": "Flowers",
+        "quantity": 5,
+        "source": "Creation Station"
+      }
+    ]
+  },
+  {
+    "id": "colorful-lamb-plush",
+    "name": "Colorful Lamb Plush",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A colorful version of the lamb plush made with rainbow materials. My Sweet Piano’s favorite!",
+    "craftingMaterials": [
+      { "name": "Lamb Plush", "quantity": 1, "source": "Crafting" },
+      { "name": "Art Supplies", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "lamb-plush",
+    "name": "Lamb Plush",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A fluffy lamb plush with a cloud-soft touch.",
+    "craftingMaterials": [
+      { "name": "Basic Plush", "quantity": 1, "source": "Crafting" },
+      { "name": "Stick", "quantity": 1, "source": "Crafting" }
+    ]
+  },
+  {
+    "id": "the-greatest-challenge",
+    "name": "The Greatest Challenge",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A book that chronicles daring feats and bold adventures. Perfect for Big Challenges.",
+    "craftingMaterials": [
+      { "name": "Ingot", "quantity": 2, "source": "Crafting" },
+      { "name": "Spark", "quantity": 2, "source": "Crafting" },
+      { "name": "Little Challenge", "quantity": 2, "source": "Gift Reward" }
     ]
   },
   {
     "id": "meditations-on-resilience",
     "name": "Meditations on Resilience",
-    "category": "Book",
-    "friendshipPoints": 4,
-    "rarity": "Uncommon",
-    "description": "A thoughtful read, ideal for Chococat's reflective moods.",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A book focused on inner strength and mental fortitude.",
     "craftingMaterials": [
-      { "name": "Blank Book", "quantity": 1, "source": "Crafting" },
-      { "name": "Little Challenge", "quantity": 1, "source": "Crafting" }
+      { "name": "Little Challenge", "quantity": 1, "source": "Gift Reward" },
+      { "name": "Blank Book", "quantity": 1, "source": "Crafting" }
     ]
   },
   {
-    "id": "mocha-item",
-    "name": "Mocha (Item)",
-    "category": "Beverage Chocolate",
-    "friendshipPoints": 4,
-    "rarity": "Uncommon",
-    "description": "A sweet beverage made with candlenut and chocolate — delicious and tag-friendly.",
+    "id": "the-future-of-everything",
+    "name": "The Future of Everything",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A visionary book about the future, filled with hope and tech. Perfect for a digital mind like TOPHAT.",
     "craftingMaterials": [
-      { "name": "Candlenut", "quantity": 1, "source": "Gathering" },
-      { "name": "Chocolate Coin", "quantity": 1, "source": "Crafting" }
+      { "name": "Little Challenge", "quantity": 3, "source": "Gift Reward" },
+      { "name": "Glitch", "quantity": 3, "source": "Gift Reward" },
+      { "name": "Star", "quantity": 2, "source": "Collectible" }
     ]
   },
   {
-    id: 'apple-pie',
-    name: 'Apple Pie',
-    category: 'Food',
-    friendshipPoints: 15,
-    rarity: 'Common',
-    description: 'A warm, delicious apple pie that fills hearts with comfort and joy.',
-    craftingMaterials: [
-      { name: 'Red Apple', quantity: 3, source: 'Apple Trees in Gemstone Mountain' },
-      { name: 'Flour', quantity: 2, source: 'Windmill in Flower Garden' },
-      { name: 'Sugar', quantity: 1, source: 'Sugar Cane in Tropical Beach' }
+    "id": "computer",
+    "name": "Computer",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A sleek and stylish computing device. Digital, fancy, and very TOPHAT.",
+    "craftingMaterials": [
+      { "name": "Glitch", "quantity": 1, "source": "Gift Reward" },
+      { "name": "Mechanism", "quantity": 2, "source": "Crafting" },
+      { "name": "Spark", "quantity": 2, "source": "Crafting" }
     ]
   },
   {
-    id: 'rainbow-cupcake',
-    name: 'Rainbow Cupcake',
-    category: 'Food',
-    friendshipPoints: 20,
-    rarity: 'Uncommon',
-    description: 'A magical cupcake with all the colors of the rainbow!',
-    craftingMaterials: [
-      { name: 'Rainbow Sprinkles', quantity: 1, source: 'Candy Shop in Sweet Valley' },
-      { name: 'Vanilla Cake', quantity: 1, source: 'Bakery in Cozy Cafe' },
-      { name: 'Whipped Cream', quantity: 2, source: 'Dairy Farm in Green Meadows' }
+    "id": "quattro-formaggi-pizza",
+    "name": "Quattro Formaggi Pizza",
+    "category": "Pizza Oven",
+    "rarity": "Rare",
+    "description": "A rich and dreamy cheese pizza with creative flair, made with coral milk and moon cheese.",
+    "craftingMaterials": [
+      { "name": "Dough", "quantity": 1, "source": "Crafting" },
+      { "name": "Coral Milk", "quantity": 1, "source": "Gathering" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Gathering" }
     ]
   },
   {
-    id: 'friendship-bracelet',
-    name: 'Friendship Bracelet',
-    category: 'Accessory',
-    friendshipPoints: 25,
-    rarity: 'Rare',
-    description: 'A handmade bracelet that symbolizes eternal friendship.',
-    craftingMaterials: [
-      { name: 'Colorful Thread', quantity: 5, source: 'Craft Shop in Art District' },
-      { name: 'Heart Charm', quantity: 1, source: 'Jewelry Box in Treasure Cove' },
-      { name: 'Silver Clasp', quantity: 1, source: 'Metalwork Station in Industrial Zone' }
+    "id": "cheese-cloud",
+    "name": "Cheese Cloud",
+    "category": "Candy Cloud Machine",
+    "rarity": "Uncommon",
+    "description": "A fluffy cloud infused with dreamy cheese essence.",
+    "craftingMaterials": [
+      { "name": "Candy Cloud", "quantity": 1, "source": "Candy Cloud Machine" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Gathering" }
     ]
   },
   {
-    id: 'strawberry-cake',
-    name: 'Strawberry Cake',
-    category: 'Food',
-    friendshipPoints: 18,
-    rarity: 'Common',
-    description: 'A sweet cake topped with fresh strawberries and cream.',
-    craftingMaterials: [
-      { name: 'Fresh Strawberries', quantity: 4, source: 'Berry Bushes in Flower Garden' },
-      { name: 'Sponge Cake', quantity: 1, source: 'Bakery in Cozy Cafe' },
-      { name: 'Whipped Cream', quantity: 2, source: 'Dairy Farm in Green Meadows' }
+    "id": "three-cheese-pizza",
+    "name": "Three Cheese Pizza",
+    "category": "Pizza Oven",
+    "rarity": "Uncommon",
+    "description": "A cozy pizza topped with a trio of dreamy cheeses.",
+    "craftingMaterials": [
+      { "name": "Dough", "quantity": 1, "source": "Crafting" },
+      { "name": "Moon Cheese", "quantity": 1, "source": "Gathering" }
     ]
   },
   {
-    id: 'flower-crown',
-    name: 'Flower Crown',
-    category: 'Accessory',
-    friendshipPoints: 22,
-    rarity: 'Uncommon',
-    description: 'A beautiful crown made of fresh, colorful flowers.',
-    craftingMaterials: [
-      { name: 'Pink Roses', quantity: 3, source: 'Rose Garden in Flower Garden' },
-      { name: 'White Daisies', quantity: 3, source: 'Daisy Field in Green Meadows' },
-      { name: 'Vine Twine', quantity: 1, source: 'Forest Grove in Woodland Area' }
+    "id": "art-supplies",
+    "name": "Art Supplies",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "Creative tools filled with dreamy stardust for the most imaginative projects.",
+    "craftingMaterials": [
+      { "name": "Paper", "quantity": 10, "source": "Crafting" },
+      { "name": "Rubber", "quantity": 3, "source": "Crafting" },
+      { "name": "Stick", "quantity": 5, "source": "Crafting" },
+      { "name": "Star", "quantity": 1, "source": "Collectible" }
     ]
   },
   {
-    id: 'pink-bow',
-    name: 'Pink Bow',
-    category: 'Accessory',
-    friendshipPoints: 12,
-    rarity: 'Common',
-    description: 'A cute pink bow that adds charm to any outfit.',
-    foundAt: ['Gift Shop in Rainbow Reef', 'Accessory Store in Fashion District']
-  },
-  {
-    id: 'dark-chocolate',
-    name: 'Dark Chocolate',
-    category: 'Food',
-    friendshipPoints: 16,
-    rarity: 'Common',
-    description: 'Rich, bittersweet chocolate for those with sophisticated tastes.',
-    craftingMaterials: [
-      { name: 'Cacao Beans', quantity: 5, source: 'Chocolate Trees in Tropical Beach' },
-      { name: 'Sugar', quantity: 1, source: 'Sugar Cane in Tropical Beach' }
+    "id": "starry-skies-shake",
+    "name": "Starry Skies Shake",
+    "category": "Dessert Machine",
+    "rarity": "Rare",
+    "description": "A dreamy, frozen dessert with a cosmic touch, perfect for starry nights.",
+    "craftingMaterials": [
+      { "name": "Cactus Cream", "quantity": 1, "source": "Dessert Machine" },
+      { "name": "Snowcicle", "quantity": 1, "source": "Gathering" },
+      { "name": "Starfruit", "quantity": 1, "source": "Gathering" }
     ]
   },
   {
-    id: 'skull-ring',
-    name: 'Skull Ring',
-    category: 'Accessory',
-    friendshipPoints: 28,
-    rarity: 'Rare',
-    description: 'A cool gothic ring that shows your rebellious side.',
-    foundAt: ['Treasure Chest in Spooky Swamp', 'Goth Shop in Dark Alley']
-  },
-  {
-    id: 'gothic-dress',
-    name: 'Gothic Dress',
-    category: 'Clothing',
-    friendshipPoints: 35,
-    rarity: 'Epic',
-    description: 'An elegant black dress with lace details and a mysterious charm.',
-    craftingMaterials: [
-      { name: 'Black Fabric', quantity: 3, source: 'Fabric Store in Fashion District' },
-      { name: 'Lace Trim', quantity: 2, source: 'Craft Shop in Art District' },
-      { name: 'Silver Buttons', quantity: 5, source: 'Button Collection in Treasure Cove' }
+    "id": "dreamy-star",
+    "name": "Dreamy Star",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A handcrafted star imbued with dreamy energy.",
+    "craftingMaterials": [
+      { "name": "Star", "quantity": 3, "source": "Crafting" }
     ]
   },
   {
-    id: 'custard-pudding',
-    name: 'Custard Pudding',
-    category: 'Food',
-    friendshipPoints: 20,
-    rarity: 'Uncommon',
-    description: 'A smooth, creamy pudding that melts in your mouth.',
-    craftingMaterials: [
-      { name: 'Fresh Eggs', quantity: 3, source: 'Chicken Coop in Green Meadows' },
-      { name: 'Milk', quantity: 2, source: 'Dairy Farm in Green Meadows' },
-      { name: 'Vanilla Extract', quantity: 1, source: 'Spice Rack in Cozy Cafe' }
+    "id": "art-supplies",
+    "name": "Art Supplies",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "Creative tools filled with dreamy stardust for the most imaginative projects.",
+    "craftingMaterials": [
+      { "name": "Paper", "quantity": 10, "source": "Crafting" },
+      { "name": "Rubber", "quantity": 3, "source": "Crafting" },
+      { "name": "Stick", "quantity": 5, "source": "Crafting" },
+      { "name": "Star", "quantity": 1, "source": "Collectible" }
     ]
   },
   {
-    id: 'golden-hat',
-    name: 'Golden Hat',
-    category: 'Accessory',
-    friendshipPoints: 30,
-    rarity: 'Rare',
-    description: 'A shiny golden hat that makes anyone look distinguished.',
-    foundAt: ['Golden Chest in Treasure Cove', 'Luxury Shop in Rich District']
-  },
-  {
-    id: 'comfy-cushion',
-    name: 'Comfy Cushion',
-    category: 'Furniture',
-    friendshipPoints: 15,
-    rarity: 'Common',
-    description: 'A soft, fluffy cushion perfect for afternoon naps.',
-    craftingMaterials: [
-      { name: 'Soft Fabric', quantity: 2, source: 'Fabric Store in Fashion District' },
-      { name: 'Cotton Stuffing', quantity: 3, source: 'Cotton Plants in Green Meadows' }
+    "id": "pastel-rainbow-banister",
+    "name": "Pastel Rainbow Banister",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A colorful, dreamy banister perfect for cloud castles.",
+    "craftingMaterials": [
+      { "name": "Star", "quantity": 10, "source": "Crafting" },
+      { "name": "Pink Dye", "quantity": 10, "source": "Crafting" },
+      { "name": "Green Dye", "quantity": 10, "source": "Crafting" },
+      { "name": "Yellow Dye", "quantity": 10, "source": "Crafting" }
     ]
   },
   {
-    id: 'cinnamon-roll',
-    name: 'Cinnamon Roll',
-    category: 'Food',
-    friendshipPoints: 17,
-    rarity: 'Common',
-    description: 'A warm, sweet roll with cinnamon swirls and glaze.',
-    craftingMaterials: [
-      { name: 'Cinnamon Sticks', quantity: 2, source: 'Spice Trees in Tropical Beach' },
-      { name: 'Sweet Dough', quantity: 1, source: 'Bakery in Cozy Cafe' },
-      { name: 'Honey Glaze', quantity: 1, source: 'Beehive in Flower Garden' }
+    "id": "decorative-cloud-cart",
+    "name": "Decorative Cloud Cart",
+    "category": "Crafting",
+    "rarity": "Rare",
+    "description": "A cloud-themed decorative cart that floats on dreams.",
+    "craftingMaterials": [
+      { "name": "Candy Cloud", "quantity": 100, "source": "Candy Cloud Machine" },
+      { "name": "Star", "quantity": 5, "source": "Crafting" },
+      { "name": "Fabric", "quantity": 5, "source": "Crafting" },
+      { "name": "Pink Dye", "quantity": 5, "source": "Crafting" }
     ]
-  },
-  {
-    id: 'fluffy-cloud',
-    name: 'Fluffy Cloud',
-    category: 'Decoration',
-    friendshipPoints: 25,
-    rarity: 'Rare',
-    description: 'A magical cloud that floats gently and brings sweet dreams.',
-    foundAt: ['Sky Castle in Cloud Kingdom', 'Weather Station in Windy Heights']
-  },
-  {
-    id: 'blue-bow',
-    name: 'Blue Bow',
-    category: 'Accessory',
-    friendshipPoints: 12,
-    rarity: 'Common',
-    description: 'A lovely blue bow as gentle as the sky.',
-    foundAt: ['Gift Shop in Rainbow Reef', 'Accessory Store in Fashion District']
-  },
-  {
-    id: 'fish-burger',
-    name: 'Fish Burger',
-    category: 'Food',
-    friendshipPoints: 19,
-    rarity: 'Uncommon',
-    description: 'A delicious burger made with fresh fish and secret sauce.',
-    craftingMaterials: [
-      { name: 'Fresh Fish', quantity: 1, source: 'Fishing Spot in Rocky Shore' },
-      { name: 'Burger Bun', quantity: 1, source: 'Bakery in Cozy Cafe' },
-      { name: 'Special Sauce', quantity: 1, source: 'Recipe Book in Cozy Cafe' }
-    ]
-  },
-  {
-    id: 'cool-sunglasses',
-    name: 'Cool Sunglasses',
-    category: 'Accessory',
-    friendshipPoints: 24,
-    rarity: 'Uncommon',
-    description: 'Stylish sunglasses that make anyone look incredibly cool.',
-    foundAt: ['Surf Shop in Tropical Beach', 'Cool Store in Fashion District']
-  },
-  {
-    id: 'rock-collection',
-    name: 'Rock Collection',
-    category: 'Collection',
-    friendshipPoints: 14,
-    rarity: 'Common',
-    description: 'A collection of interesting rocks and minerals.',
-    foundAt: ['Rocky Shore', 'Gemstone Mountain', 'Cave Entrance in Underground']
   }
 ];
 

@@ -12,7 +12,8 @@ interface Character {
   series: string;
   location: string;
   favoriteTags: string[];
-  favoriteGifts: string[];
+  favoriteGifts: { giftId: string; hearts: number }[];
+  giftGiven: string;
   friendshipLevel: number;
   maxFriendshipLevel: number;
   description: string;
@@ -25,32 +26,22 @@ interface CharacterCardProps {
 }
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character, onGiftClick }) => {
-  const renderHearts = () => {
-    const hearts = [];
-    for (let i = 0; i < character.maxFriendshipLevel; i++) {
-      hearts.push(
-        <Heart
-          key={i}
-          className={`w-4 h-4 ${
-            i < character.friendshipLevel
-              ? 'text-pink-500 fill-current'
-              : 'text-gray-300'
-          }`}
-        />
-      );
-    }
-    return hearts;
-  };
+  const renderHearts = () => (
+    <div className="flex items-center space-x-1">
+      <Heart className="w-4 h-4 text-pink-500 fill-current" />
+      <span className="text-sm text-gray-700 font-medium">{character.maxFriendshipLevel}</span>
+    </div>
+  );
 
   // Categorize gifts by friendship points
   const categorizeGifts = () => {
     const threeHeartGifts: any[] = [];
     const twoHeartGifts: any[] = [];
 
-    character.favoriteGifts.forEach((giftId) => {
+    character.favoriteGifts.forEach(({ giftId, hearts }) => {
       const gift = gifts.find(g => g.id === giftId);
       if (gift) {
-        if (gift.friendshipPoints >= 3) {
+        if (hearts >= 3) {
           threeHeartGifts.push(gift);
         } else {
           twoHeartGifts.push(gift);
@@ -99,21 +90,25 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onGiftClick })
         <div className="flex items-center justify-between">
           <div>
             <CardTitle className="text-xl text-gray-800 mb-1">{character.name}</CardTitle>
-            <Badge variant="secondary" className="bg-purple-100 text-purple-700 text-xs">
+            <Badge variant="secondary" className="bg-purple-100 text-purple-700 text-xs mb-1">
               {character.series}
             </Badge>
+            <div className="flex items-center space-x-2 text-xs text-gray-600">
+              <span>📍</span>
+              <span>{character.location}</span>
+            </div>
           </div>
           <div className="w-16 h-16 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full flex items-center justify-center">
             <Star className="w-8 h-8 text-pink-500" />
           </div>
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
         <p className="text-sm text-gray-600 leading-relaxed">{character.description}</p>
-        
+
         <div className="flex items-center justify-between">
-          <span className="text-sm font-medium text-gray-700">Friendship Level:</span>
+          <span className="text-sm font-medium text-gray-700">Max Friendship Level:</span>
           <div className="flex space-x-1">
             {renderHearts()}
           </div>
@@ -146,14 +141,9 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onGiftClick })
             <Gift className="w-4 h-4 text-pink-500" />
             <span className="text-sm font-medium text-gray-700">Favorite Gifts:</span>
           </div>
-          
+
           {renderGiftCategory(threeHeartGifts, 3, "Three Heart Gifts")}
           {renderGiftCategory(twoHeartGifts, 2, "Two Heart Gifts")}
-        </div>
-
-        <div className="flex items-center space-x-2 text-sm text-gray-600">
-          <span>📍</span>
-          <span>{character.location}</span>
         </div>
       </CardContent>
     </Card>
