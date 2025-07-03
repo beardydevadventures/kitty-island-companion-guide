@@ -42,6 +42,57 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onGiftClick })
     return hearts;
   };
 
+  // Categorize gifts by friendship points
+  const categorizeGifts = () => {
+    const threeHeartGifts: any[] = [];
+    const twoHeartGifts: any[] = [];
+
+    character.favoriteGifts.forEach((giftId) => {
+      const gift = gifts.find(g => g.id === giftId);
+      if (gift) {
+        if (gift.friendshipPoints >= 3) {
+          threeHeartGifts.push(gift);
+        } else {
+          twoHeartGifts.push(gift);
+        }
+      }
+    });
+
+    return { threeHeartGifts, twoHeartGifts };
+  };
+
+  const { threeHeartGifts, twoHeartGifts } = categorizeGifts();
+
+  const renderGiftCategory = (gifts: any[], heartCount: number, title: string) => {
+    if (gifts.length === 0) return null;
+
+    return (
+      <div className="space-y-2">
+        <div className="flex items-center space-x-2">
+          <div className="flex items-center">
+            {Array.from({ length: heartCount }, (_, i) => (
+              <Heart key={i} className="w-3 h-3 text-pink-500 fill-current" />
+            ))}
+          </div>
+          <span className="text-sm font-medium text-gray-700">{title}:</span>
+        </div>
+        <div className="grid grid-cols-1 gap-2">
+          {gifts.map((gift) => (
+            <Button
+              key={gift.id}
+              variant="outline"
+              size="sm"
+              onClick={() => onGiftClick(gift.id)}
+              className="justify-start bg-pink-50 border-pink-200 hover:bg-pink-100 text-pink-800 hover:text-pink-900"
+            >
+              <span>{gift.name}</span>
+            </Button>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Card className="bg-white/70 backdrop-blur-sm border-pink-200 hover:border-pink-300 transition-all duration-300 hover:shadow-lg transform hover:-translate-y-1">
       <CardHeader className="pb-3">
@@ -90,31 +141,14 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character, onGiftClick })
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="flex items-center space-x-2">
             <Gift className="w-4 h-4 text-pink-500" />
             <span className="text-sm font-medium text-gray-700">Favorite Gifts:</span>
           </div>
-          <div className="grid grid-cols-1 gap-2">
-            {character.favoriteGifts.map((giftId) => {
-              const gift = gifts.find(g => g.id === giftId);
-              return gift ? (
-                <Button
-                  key={giftId}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => onGiftClick(giftId)}
-                  className="justify-between bg-pink-50 border-pink-200 hover:bg-pink-100 text-pink-800 hover:text-pink-900"
-                >
-                  <span>{gift.name}</span>
-                  <div className="flex items-center space-x-1">
-                    <Heart className="w-3 h-3 text-pink-500" />
-                    <span className="text-xs">+{gift.friendshipPoints}</span>
-                  </div>
-                </Button>
-              ) : null;
-            })}
-          </div>
+          
+          {renderGiftCategory(threeHeartGifts, 3, "Three Heart Gifts")}
+          {renderGiftCategory(twoHeartGifts, 2, "Two Heart Gifts")}
         </div>
 
         <div className="flex items-center space-x-2 text-sm text-gray-600">
