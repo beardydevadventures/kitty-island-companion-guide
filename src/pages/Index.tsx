@@ -18,8 +18,8 @@ const Index = () => {
 
   const filteredCharacters = characters.filter(character =>
     character.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    character.favoriteGifts.some(giftId => 
-      gifts.find(gift => gift.id === giftId)?.name.toLowerCase().includes(searchTerm.toLowerCase())
+    character.favoriteGifts.some(fav =>
+      gifts.find(gift => gift.id === fav.giftId)?.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
@@ -44,15 +44,15 @@ const Index = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-                  Hello Kitty Island
+                  Hello Kitty Island Adventure
                 </h1>
-                <p className="text-sm text-gray-600">Adventure Companion</p>
+                <p className="text-sm text-gray-600">Gift Companion</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1 bg-pink-100 px-3 py-1 rounded-full">
                 <Star className="w-4 h-4 text-pink-500" />
-                <span className="text-sm font-medium text-pink-700">Fan Made</span>
+                <span className="text-sm font-medium text-pink-700">BF Made</span>
               </div>
             </div>
           </div>
@@ -73,27 +73,20 @@ const Index = () => {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 bg-white/60 backdrop-blur-sm border border-pink-200">
-            <TabsTrigger 
-              value="characters" 
+          <TabsList className="grid w-full grid-cols-2 bg-white/60 backdrop-blur-sm border border-pink-200">
+            <TabsTrigger
+              value="characters"
               className="data-[state=active]:bg-pink-200 data-[state=active]:text-pink-800"
             >
               <Heart className="w-4 h-4 mr-2" />
               Characters
             </TabsTrigger>
-            <TabsTrigger 
-              value="gifts" 
+            <TabsTrigger
+              value="gifts"
               className="data-[state=active]:bg-blue-200 data-[state=active]:text-blue-800"
             >
               <Gift className="w-4 h-4 mr-2" />
               Gifts
-            </TabsTrigger>
-            <TabsTrigger 
-              value="daily" 
-              className="data-[state=active]:bg-purple-200 data-[state=active]:text-purple-800"
-            >
-              <Calendar className="w-4 h-4 mr-2" />
-              Daily
             </TabsTrigger>
           </TabsList>
 
@@ -112,8 +105,8 @@ const Index = () => {
           <TabsContent value="gifts" className="mt-6">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {gifts.map((gift) => (
-                <Card 
-                  key={gift.id} 
+                <Card
+                  key={gift.id}
                   className="bg-white/60 backdrop-blur-sm border-pink-200 hover:border-pink-300 transition-all duration-200 cursor-pointer hover:shadow-lg"
                   onClick={() => handleGiftClick(gift.id)}
                 >
@@ -122,7 +115,7 @@ const Index = () => {
                       <CardTitle className="text-lg text-gray-800">{gift.name}</CardTitle>
                       <div className="flex items-center space-x-1">
                         <Heart className="w-4 h-4 text-pink-500" />
-                        <span className="text-sm font-medium text-pink-600">+{gift.friendshipPoints}</span>
+                        <span className="text-sm font-medium text-pink-600">+</span>
                       </div>
                     </div>
                   </CardHeader>
