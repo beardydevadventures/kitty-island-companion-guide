@@ -43,7 +43,7 @@ const GiftDetailModal: React.FC<GiftDetailModalProps> = ({ gift, onClose }) => {
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl bg-white/95 backdrop-blur-sm border-pink-200">
+      <DialogContent className="max-w-2xl bg-white/95 backdrop-blur-sm border-pink-200 [&>button]:hidden">
         <DialogHeader>
           <div className="flex items-center justify-between">
             <DialogTitle className="text-2xl text-gray-800 flex items-center space-x-3">
